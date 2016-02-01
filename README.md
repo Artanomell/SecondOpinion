@@ -1,5 +1,9 @@
 # SecondOpinion
 
+##This project has been forked by Glen Ritchie for the sole purpose to create a version that *also* blocks files with certain extensions, mostly .exe and other file types that may be executable. 
+TODO: Use system/mime-type to check if a file is executable and block via system calls rather than extension based checks.
+## Releases can be [found here](https://github.com/glenritchie/SecondOpinion/tree/gh-pages/dist).
+
 Integrates VirusTotal.com into Mozilla Thunderbird
 
 Imagine the following scenario. You got a strange mail but your anti virus tells you it is safe. You are unsure about it.
