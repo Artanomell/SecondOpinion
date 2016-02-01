@@ -48,6 +48,7 @@ if (!net.tschmid.secondopinion.ui)
 	  
     hideWarnings : function() {
       document.getElementById("secondOpinionWarningBar").hidden = true;
+       document.getElementById("secondOpinionWarningBar2").hidden = true;
     },
 	
     hideErrors : function() {
@@ -60,6 +61,12 @@ if (!net.tschmid.secondopinion.ui)
       document.getElementById("secondOpinionError").value = message;
     },
   
+  	showFileWarningExtension : function() 
+    {
+    	document.getElementById("secondOpinionWarningBar2").hidden = false;
+      document.getElementById("secondOpinionBar2").hidden = false;      
+    },
+    
     showWarning : function(parent, name, permalink, positives, total) {
       
       var item = document.createElement("label");

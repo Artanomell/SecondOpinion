@@ -1,4 +1,5 @@
 <!ENTITY secondopinion.warning.header   "This message contains dangerous attachments">
+<!ENTITY secondopinion.warning2.header   "This message contains dangerous attachments that have been blocked">
 <!ENTITY secondopinion.warning.detail   "Click to show scan report...">
 <!ENTITY secondopinion.warning.hide     "Hide">
 

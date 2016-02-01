@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">	
-    <em:id>secondopinion@tschmid.net</em:id>	
-    <em:name>SecondOpinion</em:name>	
+    <em:id>secondopinionplus@gar.id</em:id>	
+    <em:name>SecondOpinionPlus</em:name>	
     <em:version>2.0a</em:version>
     <em:creator>Thomas Schmid</em:creator>
-    <em:description>This extension implements a convenient way to check and upload attachments to VirusTotal.com </em:description>
+     <em:contributor>Glen Ritchie</em:contributor>
+    <em:description>This extension implements a convenient way to check and upload attachments to VirusTotal.com and blocks based on file extensions</em:description>
     <em:homepageURL></em:homepageURL>
 	<em:optionsURL>chrome://secondopinion/content/options.xul</em:optionsURL>
     <em:optionsType>2</em:optionsType>

@@ -6,6 +6,9 @@
 <overlay id="secondOpinionMessengerOverlay" 
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
+  <script type="application/x-javascript" src="chrome://secondopinion/content/zipjs/zip.js"/>
+  <script type="application/x-javascript" src="chrome://secondopinion/content/zipjs/z-worker.js"/>
+  
   <script type="application/x-javascript" src="chrome://secondopinion/content/common/common.logger.js"></script>
   <script type="application/x-javascript" src="chrome://secondopinion/content/common/common.settings.js"></script>
   <script type="application/x-javascript" src="chrome://secondopinion/content/common/common.request.js"></script>
@@ -107,6 +110,23 @@
         
       </panel>    
     </vbox>
+      <vbox  id="secondOpinionBar2" insertafter="msgNotificationBar" hidden="true">      
+      <hbox   id="secondOpinionWarningBar2" class="msgNotificationBar" align="center" hidden="true">
+        <vbox flex="1" >
+          
+          <!-- in case the attachment is dangerous we display a notification bar -->
+          <hbox flex="1">
+            <image id="secondOpinionWarningBarImage2"/>
+            <vbox flex="1">
+              <description flex="1" class="msgNotificationBarText">&secondopinion.warning2.header;</description>       
+            </vbox>
+          </hbox>       
+          
+        </vbox>
+        <button label="&secondopinion.warning.hide;" oncommand="secondOpinion.hideWarnings()"/>   
+      </hbox>  
+    </vbox>
+
   </vbox> 
 
   <menupopup id="attachmentItemContext">

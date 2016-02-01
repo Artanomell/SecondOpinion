@@ -63,13 +63,21 @@ if (!net.tschmid.secondopinion.ui)
       var callback = function(url, name,checksum) {
         self.onCheckSumCalculated(url, name,checksum);
       };
+      
+      var fileExtCallback = function(url, name, text) {
+          self.getAttachmentApi().blockAttachment(url, text);
+          self.getMessageApi().showFileWarningExtension();
+        };
             
       for( var index in currentAttachments ) {   
           
+          var attachment = currentAttachments[index];
         self.getAttachmentApi().getAttachmentCheckSum(
-          currentAttachments[index].url,
-          currentAttachments[index].name,       
+          attachment.url,
+          attachment.name,       
           callback);
+          
+        self.getAttachmentApi().checkForExt(attachment.url, attachment.name, attachment.size, fileExtCallback);
       }
     },
   

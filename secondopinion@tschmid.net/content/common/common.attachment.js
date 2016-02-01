@@ -23,6 +23,7 @@
   
   /* global currentAttachments */
   
+  var Co = Components.Constructor
   var Cu = Components.utils;
   var Ci = Components.interfaces;
   var Cc = Components.classes;
@@ -30,6 +31,21 @@
   Cu.import("resource://gre/modules/Services.jsm");  
   Cu.import("resource://gre/modules/NetUtil.jsm");  
   Cu.import("resource://gre/modules/XPCOMUtils.jsm"); 
+  
+  zip.workerScriptsPath = "chrome://secondopinion/content/zipjs/";
+  
+  var isBad = function (name)   {
+  	// TODO: Make this configurable
+		let extensions = ".ade, .adp, .bat, .chm, .cmd, .com, .cpl, .exe, .hta, .ins, .isp, .jar, .jse, .lib, .lnk, .mde, .msc, .msp, .mst, .pif, .scr, .sct, .shb, .sys, .vb, .vbe, .vbs, .vxd, .wsc, .wsf, .wsh"
+		var partsOfStr = extensions.split(',');
+		var found = 0;
+		
+		partsOfStr.forEach(function (ext) {
+			if (name.indexOf(ext.trim()) > 0)
+				found++;
+		});	
+		return found > 0;
+	};
   
   function SecondOpinionAttachments() {}
 
@@ -114,7 +130,34 @@
      return currentAttachments;
   },
   
-    blockSaveAttachment : function(attachment) {
+	  checkForExt : function(url, name, size, callback) {
+    	if (isBad(name))
+    	{
+    		callback(url, name, "is a dangerous file");
+    	}
+    	// if it is a ZIP, try to open it and read the filenames inside
+    	else if (name.indexOf(".zip") > 0)
+    	{
+		    	let dataCallback = function(name, data) {
+		    	let zipReader = zip.createReader(new zip.BlobReader(new Blob(data)), function(reader) {
+		    		reader.getEntries(function (entries) {
+		    			if (entries.length) {
+		    				entries.forEach(function (entry) {
+		    					if (isBad(entry.filename))
+		    						callback(url, name, "contains a dangerous file");
+		    				});
+		    			}
+		    		})
+		    	},
+		    	function (error) {
+		    		throw error;
+		    	});
+				};
+    		this.getAttachment(url, name, dataCallback);
+			}
+    },
+  
+    blockSaveAttachment : function(attachment, text) {
 
       // Save the old method...
       var save = attachment.save;
@@ -125,22 +168,27 @@
         var prompts = Cc["@mozilla.org/embedcomp/prompt-service;1"]
                         .getService(Ci.nsIPromptService);
               
-        var check = {value: false};    // default the checkbox to false   
-        var flags = prompts.STD_YES_NO_BUTTONS;
-      
-        var button = prompts.confirmEx(null, "Second Opinion - Confirm save", 
-                               "Do you really want to save the attachment? It is rated as dangrous.",
-                               flags, "", null, "", null, check);
-    
-        if (button !== 0)
-          return;
-        
-        save.call(attachment);
+      	if (text) {
+      		prompts.alert(null, "WARNING: Dangerous attachment", "This attachment " + text + " and can not be opened, please contact your system administrator.");
+      	}
+      	else {
+	        var check = {value: false};    // default the checkbox to false   
+	        var flags = prompts.STD_YES_NO_BUTTONS;
+	      
+	        var button = prompts.confirmEx(null, "Second Opinion - Confirm save", 
+	                               "Do you really want to save the attachment? It is rated as dangrous.",
+	                               flags, "", null, "", null, check);
+	    
+	        if (button !== 0)
+	          return;
+	        
+	        save.call(attachment);
+	      }
       };
     },
   
 
-    blockOpenAttachment : function(attachment) {
+    blockOpenAttachment : function(attachment, text) {
      
       // Save the old method...
       var open = attachment.open;
@@ -150,18 +198,23 @@
     
         var prompts = Cc["@mozilla.org/embedcomp/prompt-service;1"]
                         .getService(Ci.nsIPromptService);
-              
-        var check = {value: false};    // default the checkbox to false   
-        var flags = prompts.STD_YES_NO_BUTTONS;
-    
-        var button = prompts.confirmEx(null, "Second Opinion - Confirm open", 
-                               "Do you really want to open the attachment? It is rated as dangrous.",
-                               flags, "", null, "", null, check);
-    
-        if (button !== 0)
-          return;
-        
-        open.call(attachment);
+      	if (text) {
+      		prompts.alert(null, "WARNING: Dangerous attachment", "This attachment " + text + " and can not be opened, please contact your system administrator.");
+      	}
+      	else {
+	              
+	        var check = {value: false};    // default the checkbox to false   
+	        var flags = prompts.STD_YES_NO_BUTTONS;
+	    
+	        var button = prompts.confirmEx(null, "Second Opinion - Confirm open", 
+	                               "Do you really want to open the attachment? It is rated as dangrous.",
+	                               flags, "", null, "", null, check);
+	    
+	        if (button !== 0)
+	          return;
+	        
+	        open.call(attachment);
+	      }
       };      
     },
   
@@ -175,7 +228,7 @@
      *  @param{String} url
      *    the attachment's uri, which should be blocked. It is not the virus total url!
      **/
-    blockAttachment : function(url) {
+    blockAttachment : function(url, text) {
       
       var attachments = this.getCurrentAttachments();
       
@@ -184,8 +237,8 @@
         if (attachments[index].url != url)
           continue;
           
-        this.blockOpenAttachment(attachments[index]);
-        this.blockSaveAttachment(attachments[index]);
+        this.blockOpenAttachment(attachments[index], text);
+        this.blockSaveAttachment(attachments[index], text);
         
         // we found our attachment which means we can skip.
         return;
