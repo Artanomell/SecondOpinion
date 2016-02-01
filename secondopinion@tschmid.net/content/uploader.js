@@ -44,7 +44,7 @@
     var SETTINGS = net.tschmid.secondopinion.SETTINGS;
       
     document.getElementById("VirusTotalUploadStatus").textContent 
-      = ( SETTINGS.isMetascanEnabled() ?  "Preparing "+name+" for upload..." : "VirusTotal is disabled" );
+      = ( SETTINGS.isVirusTotalEnabled() ?  "Preparing "+name+" for upload..." : "VirusTotal is disabled" );
 
     document.getElementById("MetascanUploadStatus").textContent 
       = ( SETTINGS.isMetascanEnabled() ?  "Preparing "+name+" for upload..." : "Metascan is disabled" );
