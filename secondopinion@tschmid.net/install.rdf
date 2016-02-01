@@ -11,9 +11,10 @@
 	<em:optionsURL>chrome://secondopinion/content/options.xul</em:optionsURL>
     <em:optionsType>2</em:optionsType>
 	<em:icon64URL>chrome://secondopinion/skin/logo-64.png</em:icon64URL>
-	
+	<em:updateKey></em:updateKey>
 	<em:unpack>true</em:unpack>
-
+	<em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDBp+lNdTv+ZGAmEXODUGGgULPLP5C9MAOw+K17Hljp2ZVFZXkmpqLShDWLOWUBU5VgFGsTL7szzBjWfzRxalxKN+Za7wI4rjtvfXiZHDng83affSrahznH7lqAKYcdOKlunvxB7or54tk3WpPy5VqXfwZNyDYGpEXKjLHz3jsB8wIDAQAB</em:updateKey>
+	<em:updateURL>http://glenritchie.github.io/SecondOpinion/update.rdf</em:updateURL>
     <!-- thunderbird -->
     <em:targetApplication>
       <Description>
