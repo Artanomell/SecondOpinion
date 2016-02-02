@@ -1,0 +1,22 @@
+<project name="secondopinionplus" default="xpi">
+	<property environment="env"/>
+	
+	<target name="xpi">
+		<zip destfile="secondopinionplus.xpi"  basedir="secondopinion@tschmid.net"/>
+	</target>
+
+	<target name="sign">
+		<exec executable="cmd" searchpath="true" resolveexecutable="true">
+			<arg value="/c"/>
+			<arg value="jpm"/>
+			<arg value="sign"/>
+			<arg value="--api-key"/>
+			<arg value="${env.MOZ_API_KEY}"/>
+			<arg value="--api-secret"/>
+			<arg value="${env.MOZ_API_SECRET}"/>
+			<arg value="--xpi"/>
+			<arg value="secondopinionplus.xpi"/>
+		</exec>
+	</target>
+	
+</project>
