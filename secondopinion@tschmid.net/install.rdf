@@ -3,7 +3,7 @@
   <Description about="urn:mozilla:install-manifest">	
     <em:id>secondopinionplus@gar.id</em:id>	
     <em:name>SecondOpinionPlus</em:name>	
-    <em:version>2.0.1</em:version>
+    <em:version>2.1</em:version>
     <em:creator>Thomas Schmid</em:creator>
      <em:contributor>Glen Ritchie</em:contributor>
     <em:description>This extension implements a convenient way to check and upload attachments to VirusTotal.com and blocks based on file extensions</em:description>
