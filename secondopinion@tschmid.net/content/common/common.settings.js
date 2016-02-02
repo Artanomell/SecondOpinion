@@ -151,7 +151,28 @@
                   .getService(Ci.nsIPrefBranch);
             
       return pref.getBoolPref("extensions.secondopinion.isUnknownResourceSafe");
-    }
+    },
+    
+    getBlockedExtensions : function() {
+    	var pref = Cc["@mozilla.org/preferences-service;1"]
+                  .getService(Ci.nsIPrefBranch);
+      
+      return pref.getCharPref("extensions.secondopinion.extensions.blockList"); 
+    },
+    
+     getAllowAccessToBlockedExtensions : function() {
+    	var pref = Cc["@mozilla.org/preferences-service;1"]
+                  .getService(Ci.nsIPrefBranch);
+      
+      return pref.getBoolPref("extensions.secondopinion.extensions.allowAccess"); 
+    },
+    
+     getMaxZipSize : function() {
+    	var pref = Cc["@mozilla.org/preferences-service;1"]
+                  .getService(Ci.nsIPrefBranch);
+      
+      return pref.getIntPref("extensions.secondopinion.extensions.maxZipSize"); 
+    },
   };
   
   if(!exports)

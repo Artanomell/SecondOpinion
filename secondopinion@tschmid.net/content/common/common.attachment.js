@@ -33,10 +33,12 @@
   Cu.import("resource://gre/modules/XPCOMUtils.jsm"); 
   
   zip.workerScriptsPath = "chrome://secondopinion/content/zipjs/";
-  
+  var LOGGER = net.tschmid.secondopinion.LOGGER;
+   
   var isBad = function (name)   {
-  	// TODO: Make this configurable
-		let extensions = ".ade, .adp, .bat, .chm, .cmd, .com, .cpl, .exe, .hta, .ins, .isp, .jar, .jse, .lib, .lnk, .mde, .msc, .msp, .mst, .pif, .scr, .sct, .shb, .sys, .vb, .vbe, .vbs, .vxd, .wsc, .wsf, .wsh"
+  	var SETTINGS = net.tschmid.secondopinion.SETTINGS;
+  	
+		let extensions = SETTINGS.getBlockedExtensions();
 		var partsOfStr = extensions.split(',');
 		var found = 0;
 		
@@ -131,14 +133,17 @@
   },
   
 	  checkForExt : function(url, name, size, callback) {
+  		var SETTINGS = net.tschmid.secondopinion.SETTINGS;
+
     	if (isBad(name))
     	{
+    	LOGGER.logDebug("isbad " + name + ": checkForExt");
     		callback(url, name, "is a dangerous file");
     	}
     	// if it is a ZIP, try to open it and read the filenames inside
-    	else if (name.indexOf(".zip") > 0)
+    	else if (name.indexOf(".zip") > 0 && size <= (SETTINGS.getMaxZipSize()*1024*1024))
     	{
-		    	let dataCallback = function(name, data) {
+		    let dataCallback = function(name, data) {
 		    	let zipReader = zip.createReader(new zip.BlobReader(new Blob(data)), function(reader) {
 		    		reader.getEntries(function (entries) {
 		    			if (entries.length) {
@@ -159,6 +164,7 @@
   
     blockSaveAttachment : function(attachment, text) {
 
+			var SETTINGS = net.tschmid.secondopinion.SETTINGS;
       // Save the old method...
       var save = attachment.save;
       
@@ -168,7 +174,7 @@
         var prompts = Cc["@mozilla.org/embedcomp/prompt-service;1"]
                         .getService(Ci.nsIPromptService);
               
-      	if (text) {
+      	if (text && !SETTINGS.getAllowAccessToBlockedExtensions()) {
       		prompts.alert(null, "WARNING: Dangerous attachment", "This attachment " + text + " and can not be opened, please contact your system administrator.");
       	}
       	else {
@@ -190,6 +196,7 @@
 
     blockOpenAttachment : function(attachment, text) {
      
+     	var SETTINGS = net.tschmid.secondopinion.SETTINGS;
       // Save the old method...
       var open = attachment.open;
       
@@ -198,7 +205,7 @@
     
         var prompts = Cc["@mozilla.org/embedcomp/prompt-service;1"]
                         .getService(Ci.nsIPromptService);
-      	if (text) {
+      	if (text && !SETTINGS.getAllowAccessToBlockedExtensions()) {
       		prompts.alert(null, "WARNING: Dangerous attachment", "This attachment " + text + " and can not be opened, please contact your system administrator.");
       	}
       	else {

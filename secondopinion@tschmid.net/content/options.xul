@@ -52,5 +52,19 @@
 
   <setting pref="extensions.secondopinion.isUnknownResourceSafe" 
            type="bool" title="Consider Unknown Resources as safe"
-           desc="By deafult unknown resources are considered as safe. " />
+           desc="By default unknown resources are considered as safe. " />
+           
+  <!-- Extension blocking -->         
+  <setting pref="extensions.secondopinion.extensions.blockList" 
+           type="string" title="Extensions to block" 
+		       desc="A comma separated list of extensions to block. "/>       
+
+  <setting pref="extensions.secondopinion.extensions.allowAccess" 
+           type="bool" title="Allow access" 
+		       desc="If set, you will be able to open or save any attachment that was blocked."/>       
+
+  <setting pref="extensions.secondopinion.extensions.maxZipSize" 
+           type="integer" title="Maximum zip size (MB)" 
+		       desc="Maximum size in Megabytes of a zip attachment that should be checked, set to 0 to disable scanning of zip files."/>       
+
 </vbox>

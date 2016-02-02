@@ -21,3 +21,7 @@ pref("extensions.secondopinion.excluded", "Blueliv;Quttera;AutoShun");
 pref("extensions.secondopinion.loglevel", 0);
 pref("extensions.secondopinion.isUnknownResourceSafe", true);
 
+pref("extensions.secondopinion.extensions.blockList", ".ade, .adp, .bat, .chm, .cmd, .com, .cpl, .exe, .hta, .ins, .isp, .jar, .jse, .lib, .lnk, .mde, .msc, .msp, .mst, .pif, .scr, .sct, .shb, .sys, .vb, .vbe, .vbs, .vxd, .wsc, .wsf, .wsh");
+pref("extensions.secondopinion.extensions.allowAccess", false);
+pref("extensions.secondopinion.extensions.maxZipSize", 5);
+
