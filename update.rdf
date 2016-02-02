@@ -2,32 +2,43 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$ShB051"
-                   em:version="2.0a">
-    <em:targetApplication RDF:resource="rdf:#$VhB051"/>
+  <RDF:Description RDF:about="rdf:#$V10"
+                   em:version="1.0">
+    <em:targetApplication RDF:resource="rdf:#$V10Target"/>
   </RDF:Description>
   <RDF:Description RDF:about="urn:mozilla:extension:secondopinionplus@gar.id"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAAQRrb65tLRHEjKSFXlqHTwWxSOk8THRx3ByzdAmmZ4BxWHN3c2Fl0qi1/XScSWCau2i87BJK/7/NHUiOglEYqmah89ZvK0UYETZ22mAu6NjCQZs+2VYNC1xwB6R+mUOaUVcxxmzIZhPLfZE/1a9aSNyTLqrSXGn7davSyoks4Ij">
-    <em:updates RDF:resource="rdf:#$IhB051"/>
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAFDZDRutxWaeVZbG0/Wab/gVnqR96wwbA95kEc4kqHsEWFv0L9yN6HskksHNYGfxRDNzCf5c0JWrLFgh9kzIAQOZXzLRIcJ7Ka/x5Cp7k0u+G8BXQepJ4CNMo0s1X9BhWfLbwtv6tMHDi0m3fZwWLleCMxpBUk5QbtYcjaK3WP0p">
+    <em:updates RDF:resource="rdf:#$VERSIONS"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$MhB051"
-                   em:id="{3550f703-e582-4d05-9a08-453d09bdfdc6}"
-                   em:minVersion="37.*"
-                   em:maxVersion="41.*"
-                   em:updateLink="http://glenritchie.github.io/SecondOpinion/dist/secondopinionplus-1.0-tb.xpi"
-                   em:updateInfoURL="http://glenritchie.github.io/SecondOpinion/Version1.0.html" />
-  <RDF:Description RDF:about="rdf:#$JhB051"
-                   em:version="1.0">
-    <em:targetApplication RDF:resource="rdf:#$MhB051"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$VhB051"
+  <RDF:Description RDF:about="rdf:#$V20ATarget"
                    em:id="{3550f703-e582-4d05-9a08-453d09bdfdc6}"
                    em:minVersion="37.*"
                    em:maxVersion="44.*"
                    em:updateLink="http://glenritchie.github.io/SecondOpinion/dist/secondopinionplus-2.0a-tb.xpi"
                    em:updateInfoURL="http://glenritchie.github.io/SecondOpinion/Version2.0a.html" />
-  <RDF:Seq RDF:about="rdf:#$IhB051">
-    <RDF:li RDF:resource="rdf:#$JhB051"/>
-    <RDF:li RDF:resource="rdf:#$ShB051"/>
+  <RDF:Description RDF:about="rdf:#$V10Target"
+                   em:id="{3550f703-e582-4d05-9a08-453d09bdfdc6}"
+                   em:minVersion="37.*"
+                   em:maxVersion="41.*"
+                   em:updateLink="http://glenritchie.github.io/SecondOpinion/dist/secondopinionplus-1.0-tb.xpi"
+                   em:updateInfoURL="http://glenritchie.github.io/SecondOpinion/Version1.0.html" />
+  <RDF:Description RDF:about="rdf:#$V201Target"
+                   em:id="{3550f703-e582-4d05-9a08-453d09bdfdc6}"
+                   em:minVersion="37.*"
+                   em:maxVersion="44.*"
+                   em:updateLink="http://glenritchie.github.io/SecondOpinion/dist/secondopinionplus-2.0.1-tb.xpi"
+                   em:updateInfoURL="http://glenritchie.github.io/SecondOpinion/Version201.html" />
+  <RDF:Description RDF:about="rdf:#$V20A"
+                   em:version="2.0a">
+    <em:targetApplication RDF:resource="rdf:#$V20ATarget"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="rdf:#$V201"
+                   em:version="2.0.1">
+    <em:targetApplication RDF:resource="rdf:#$V201Target"/>
+  </RDF:Description>
+  <RDF:Seq RDF:about="rdf:#$VERSIONS">
+    <RDF:li RDF:resource="rdf:#$V10"/>
+    <RDF:li RDF:resource="rdf:#$V20A"/>
+    <RDF:li RDF:resource="rdf:#$V201"/>
   </RDF:Seq>
 </RDF:RDF>
