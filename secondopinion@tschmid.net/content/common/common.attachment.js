@@ -43,7 +43,7 @@
 		var found = 0;
 		
 		partsOfStr.forEach(function (ext) {
-			if (name.indexOf(ext.trim()) > 0)
+			if (name.endsWith(ext.trim()))
 				found++;
 		});	
 		return found > 0;
